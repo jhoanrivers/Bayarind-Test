@@ -9,7 +9,7 @@ Here are the content of my project
 
 
 ### Problem Solving
-I know my code is not completely correct, but here I provided solution of money combination of groceries
+I know my code is not completely correct because the app crashed when inputting a big number (50000) Error: java heap, failed to handle recursive function, but here I provided solution of money combination of groceries
 
 ```kotlin
 fun findPossibly(amount: String) {
