@@ -22,6 +22,12 @@ class PossiblyPayAdapter : RecyclerView.Adapter<PossiblyPayAdapter.ViewHolder>()
 
         fun bind(item: String, context: Context) {
             binding.tvValue.text = item
+
+            if(item == MainUtils.UANG_PAS){
+                binding.wrapperCard.setCardBackgroundColor(ContextCompat.getColor(context, R.color.yellow))
+            } else {
+                binding.wrapperCard.setCardBackgroundColor(ContextCompat.getColor(context, R.color.gray))
+            }
         }
     }
 
