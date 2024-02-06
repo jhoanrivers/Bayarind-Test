@@ -40,7 +40,6 @@ _loading telling user for loading process, and _possiblePays is the result of po
 
 
 ```kotlin
-
 private fun getPossiblyPays(amount: Int, denominations: List<Int>): List<List<Int>> {
         val reversedDenomination = denominations.reversed()
         val results = mutableListOf<List<Int>>()
@@ -48,39 +47,40 @@ private fun getPossiblyPays(amount: Int, denominations: List<Int>): List<List<In
         getCombination(amount, reversedDenomination, 0, current, results)
         return results
     }
+```
 
-
-private fun getCombination(amount: Int, denominations: List<Int>, idx: Int, current: MutableList<Int>, results: MutableList<List<Int>>) {
-        if (idx == denominations.size) {
-            return
-        }
-        if (amount <= 0) {
-            results.add(ArrayList(current))
-            return
-        }
-        if (current.size > 20) {
-            return
-        }
-
-        current.add(denominations[idx])
-        getCombination(amount - denominations[idx], denominations, idx, current, results)
-        current.removeAt(current.size - 1)
-
-        getCombination(amount, denominations, idx + 1, current, results)
+```kotlin
+private fun getCombination(amount: Int, denominations: List<Int>, idx: Int, current: MutableList<Int>, results: MutableSet<Int>) {
+    if (idx == denominations.size) {
+        return
     }
+    if (amount <= 0) {
+        results.add(current.sum())
+        return
+    }
+    if(current.size > 20){
+        return
+    }
+    current.add(denominations[idx])
+    getCombination(amount - denominations[idx], denominations, idx, current, results)
+    current.removeAt(current.size - 1)
 
+    getCombination(amount, denominations, idx + 1, current, results)
+}
 ```
 
 getPossiblyPays has property current as list of combination possible value to reach amount.
-Return of this function is results which is list of current.
+The function will return list of increment of combination denomination as results.
 
 Okay, let's dive into getCombination function. this function has params amount, denominations, index, current, and results.<br>
-getCombination is a recursive function that will be called as long as **value of current amount minus item of denomination still more than 0**
-and all the items will be collect in current list.<br>
-When it reach <= 0 then result add its new item which is "current".<br>
+getCombination is a recursive function that will be called as long as **value of current amount minus item of denomination still more than 0** . <br>
+I set restriction for current list size maximum is 20. If combination  more than 20, it will return nothing.
+
+For every decrement of amount and denomintaion[idx] all the items will be collect in current list as long as results more than 0<br>
+When it reach <= 0 then result add new item as current.sum()<br>
 
 Remove the last item of current list so that it can be used for another combination. <br>
-in next line, the recursive call getCombination used residue of amount, and ++idx for
+In next line, the recursive call getCombination used residue of amount, and ++idx for
 
 ## Screenshot
 

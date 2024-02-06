@@ -19,12 +19,9 @@ class MainViewModel : ViewModel() {
         val nominal = listOf(100, 200, 500, 1000, 2000, 5000, 10000, 20_000, 50_000, 100_000)
         val collectDistinctValue = mutableListOf<String>()
         if(amount.toInt() < 100_000){
-            val caraBayars = getPossiblyPays(amount.toInt(), nominal)
-            for (i in caraBayars.size - 1 downTo 0) {
-                val sum = caraBayars[i].sum()
-                if(!collectDistinctValue.contains(sum.toString())){
-                    collectDistinctValue.add(sum.toString())
-                }
+            val caraBayars = getPossiblyPays(amount.toInt(), nominal).toMutableList().sorted()
+            for (item in caraBayars) {
+                collectDistinctValue.add(item.toString())
             }
         }
         collectDistinctValue.add(MainUtils.UANG_PAS)
@@ -34,33 +31,31 @@ class MainViewModel : ViewModel() {
     }
 
 
-    fun getPossiblyPays(amount: Int, denominations: List<Int>): List<List<Int>> {
+    private fun getPossiblyPays(amount: Int, denominations: List<Int>): Set<Int> {
         val reversedDenomination = denominations.reversed()
-        val results = mutableListOf<List<Int>>()
+        val results = mutableSetOf<Int>()
         val current = mutableListOf<Int>()
         getCombination(amount, reversedDenomination, 0, current, results)
         return results
     }
 
-    private fun getCombination(amount: Int, denominations: List<Int>, idx: Int, current: MutableList<Int>, results: MutableList<List<Int>>) {
+
+    private fun getCombination(amount: Int, denominations: List<Int>, idx: Int, current: MutableList<Int>, results: MutableSet<Int>) {
         if (idx == denominations.size) {
             return
         }
         if (amount <= 0) {
-            results.add(ArrayList(current))
+            results.add(current.sum())
             return
         }
-
         if(current.size > 20){
             return
         }
-
         current.add(denominations[idx])
         getCombination(amount - denominations[idx], denominations, idx, current, results)
         current.removeAt(current.size - 1)
 
         getCombination(amount, denominations, idx + 1, current, results)
     }
-
 
 }
