@@ -23,8 +23,13 @@ class MainViewModel : ViewModel() {
             for (item in caraBayars) {
                 collectDistinctValue.add(item.toString())
             }
+        } else if (amount.toInt() == 100_000){
+            collectDistinctValue.add(MainUtils.UANG_PAS)
         }
-        collectDistinctValue.add(MainUtils.UANG_PAS)
+        if(collectDistinctValue.contains(amount)){
+            collectDistinctValue.remove(amount)
+            collectDistinctValue.add(MainUtils.UANG_PAS)
+        }
         _loading.value = false
         _possiblyPays.value = collectDistinctValue
 
