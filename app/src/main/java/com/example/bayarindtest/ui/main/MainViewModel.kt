@@ -14,6 +14,7 @@ class MainViewModel : ViewModel() {
 
 
     fun findPossibly(amount: String) {
+        amount.replace(Regex("[^0-9]"), "")
         _loading.value = true
         val nominal = listOf(100, 200, 500, 1000, 2000, 5000, 10000, 20_000, 50_000, 100_000)
         val collectDistinctValue = mutableListOf<String>()
