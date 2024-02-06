@@ -4,6 +4,86 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.MainActivity">
+    android:padding="16dp"
+    tools:context=".ui.main.MainActivity"
+    android:background="@color/blue"
+    >
+
+
+    <TextView
+        android:id="@+id/tvLabelTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/label_title"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutWrapper"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLabelTitle"
+            android:layout_marginTop="12dp"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="123"
+                android:inputType="number"
+                android:textAlignment="center"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ProgressBar
+            android:id="@+id/pb"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="12dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@id/inputLayoutWrapper"
+            app:layout_constraintBottom_toBottomOf="@id/inputLayoutWrapper"
+            app:layout_constraintTop_toTopOf="@id/inputLayoutWrapper"
+            />
+
+
+
+
+    <TextView
+        android:id="@+id/tvLabelResults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputLayoutWrapper"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/white"
+        android:text="@string/possibly_pay"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvResults"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelResults"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="24dp"
+
+
+        />
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
