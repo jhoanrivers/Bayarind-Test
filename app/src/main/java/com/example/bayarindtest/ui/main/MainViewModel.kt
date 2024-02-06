@@ -51,6 +51,10 @@ class MainViewModel : ViewModel() {
             return
         }
 
+        if(current.size > 20){
+            return
+        }
+
         current.add(denominations[idx])
         getCombination(amount - denominations[idx], denominations, idx, current, results)
         current.removeAt(current.size - 1)
